@@ -1,4 +1,4 @@
-![osquery-logo](static/AppLogo.png) + ![Splunk-logo](static/splunk_logo.png)
+![osquery-logo](static/appIcon_2x.png) + ![Splunk-logo](static/splunk_logo.png)
 # TA-osquery
 An Splunk technology add-on for osquery
 
