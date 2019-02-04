@@ -1,5 +1,4 @@
-![osquery-logo](static/appIcon_2x.png) + ![Splunk-logo](static/splunk_logo.png)
-# TA-osquery
+# TA-osquery ![osquery-logo](static/appIcon_2x.png) 
 An Splunk technology add-on for osquery
 
 Original Author: Jose Hernandez
