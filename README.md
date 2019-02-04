@@ -1,11 +1,10 @@
 # TA-osquery ![osquery-logo](static/appIcon_2x.png) 
 An Splunk technology add-on for osquery
 
-Original Author: Jose Hernandez
-Current maintainers:
-Sourcetype: osquery:results, osquery:snapshots, osquery:INFO, osquery:WARNING, osquery:ERROR
-Has index-time ops: false
-
+- Original Author: Jose Hernandez
+- Current maintainers:
+- Sourcetype: osquery:results, osquery:snapshots, osquery:INFO, osquery:WARNING, osquery:ERROR
+- Has index-time ops: false
 
 # Features
 * Parses and extracts fields for the following logs: 
