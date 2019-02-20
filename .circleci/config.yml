@@ -69,7 +69,7 @@ jobs:
           paths:
             - "venv"
       - persist_to_workspace:
-          root: TA-osquery.tar.gz
+          root: ~/
           paths:
               - TA-osquery.tar.gz
   publish-github-release:
