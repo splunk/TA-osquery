@@ -57,11 +57,11 @@ jobs:
       - run:
           name: run app inspect
           command: |
-            ls -lah
-            tar -czvf TA-osquery.tar.gz TA-osquery/
+            rm -rf TA-osquery/.git
+            tar -zcvf TA-osquery.tar.gz TA-osquery
             cd appinspect-latest
             source venv/bin/activate
-            splunk-appinspect inspect ~/TA-osquery.tar.gz --included-tags=cloud 
+            splunk-appinspect inspect ../TA-osquery.tar.gz --included-tags=cloud 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "default/app.conf" }}
           paths:
