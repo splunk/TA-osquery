@@ -57,7 +57,7 @@ jobs:
       - run:
           name: run app inspect
           command: |
-            rm -rf TA-osquery/.git
+            ls -lah
             tar -czvf TA-osquery.tar.gz TA-osquery/
             cd appinspect-latest
             source venv/bin/activate
