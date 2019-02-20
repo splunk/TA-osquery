@@ -49,8 +49,8 @@ jobs:
           command: |
             cd appinspect-latest
             rm -rf venv
-            pip install --upgrade pip setuptools
-            pip install virtualenv
+            sudo pip install --upgrade pip setuptools
+            sudo pip install virtualenv
             virtualenv --clear venv
             source venv/bin/activate
             pip install .
