@@ -2,9 +2,10 @@ TA-osquery
 ==========
 
 ![osquery-logo](static/appIcon_2x.png) 
-An Splunk technology add-on for osquery
 
-*Join the conversation at* [![Slack Status](https://https://img.shields.io/badge/slack-@splunk/security-yellow.svg?logo=slack)](https://splunk-usergroups.slack.com/signup)
+A Splunk technology add-on for osquery
+
+*Join the conversation at* [![Slack Status](https://img.shields.io/badge/slack-@splunk/security-yellow.svg?logo=slack)](https://splunk-usergroups.slack.com/signup)
 
 | branch | build status |
 | ---    | ---          |
