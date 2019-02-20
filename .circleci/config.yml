@@ -1,0 +1,79 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+
+dependencies:
+  cache_directories:
+    - "~/.apt-cache"
+  pre:
+    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
+
+apt-run: &apt-install
+  name: install system packages
+  command: |
+    sudo apt update -qq
+    sudo apt install -y python-pip
+
+version: 2.1
+
+executors:
+  content-executor:
+    docker:
+      - image: circleci/python:2.7.13
+    working_directory: ~/repo
+
+jobs:
+  validate-content:
+    executor: content-executor
+    steps:
+      - run:
+          name: checkout repo
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "" ]; then
+                git clone https://${GITHUB_TOKEN}@github.com/d1vious/ta-osquery.git
+            else
+                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/d1vious/ta-osquery.git
+            fi
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "appinspect-latest/PKG-INFO" }}
+      - run: *apt-install
+      - run:
+          name: grab appinspect
+          command: |
+            curl -Ls http://dev.splunk.com/goto/appinspectdownload -o appinspect-lastest.tar.gz
+            mkdir appinspect-latest
+            tar -zxvf appinspect-lastest.tar.gz -C appinspect-latest --strip-components=1
+      - run:
+          name: install appinspect
+          command: |
+            cd appinspect-latest
+            rm -rf venv
+            pip install --upgrade pip setuptools
+            pip install virtualenv
+            virtualenv --clear venv
+            source venv/bin/activate
+            pip install .
+      - run:
+          name: run app inspect
+          command: |
+            rm -rf TA-osquery/.git
+            tar -czvf TA-osquery.tar.gz TA-osquery/
+            cd appinspect
+            source venv/bin/activate
+            splunk-appinspect inspect ~/TA-osquery.tar.gz --included-tags=cloud 
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "appinspect-latest/PKG-INFO" }}
+          paths:
+            - "venv"
+workflows:
+  version: 2.1
+  validate-and-build:
+    jobs:
+      - validate-content:
+          filters:
+            tags:
+              only: /.*/
+
+
+            
