@@ -58,6 +58,8 @@ jobs:
           name: run app inspect
           command: |
             rm -rf TA-osquery/.git
+            rm -rf TA-osquery/.circleci
+            rm -rf TA-osquery/.gitignore
             tar -zcvf TA-osquery.tar.gz TA-osquery
             cd appinspect-latest
             source venv/bin/activate
