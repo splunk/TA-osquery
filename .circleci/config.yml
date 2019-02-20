@@ -31,9 +31,9 @@ jobs:
           name: checkout repo
           command: |
             if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@github.com:splunk/TA-osquery.git
+                git clone https://${GITHUB_TOKEN}@github.com/splunk/TA-osquery.git
             else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com:splunk/TA-osquery.git
+                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/splunk/TA-osquery.git
             fi
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "TA-osquery/default/app.conf" }}
