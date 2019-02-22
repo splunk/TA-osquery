@@ -45,7 +45,7 @@ jobs:
             mkdir appinspect-latest
             tar -zxvf appinspect-lastest.tar.gz -C appinspect-latest --strip-components=1
       - run:
-          name: install app inspect
+          name: install appinspect
           command: |
             cd appinspect-latest
             rm -rf venv
@@ -55,7 +55,7 @@ jobs:
             source venv/bin/activate
             pip install .
       - run:
-          name: run app inspect
+          name: run appinspect
           command: |
             rm -rf TA-osquery/.git
             rm -rf TA-osquery/.circleci
