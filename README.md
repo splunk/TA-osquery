@@ -67,6 +67,7 @@ sudo /usr/local/bin/osqueryctl start
 
 # Logging to AWS (preferred)
 **osquery config**
+
 This is the preferred collection method as it removes the need for a Universal Forwarder on each endpoint and ensures remote log connection can be achieved whether or not the endpoint is connected to the corporate network. Splunk Cloud is great way of logging from endpoints but would still require a Universal Forwarder to be rolled out.
 
 The install process is the same as above, apart from the osquery.conf needs to be modified to log to AWS. This can be done by following the osquery doc https://osquery.readthedocs.io/en/stable/deployment/aws-logging/
