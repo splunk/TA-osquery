@@ -20,7 +20,7 @@ version: 2.1
 executors:
   content-executor:
     docker:
-      - image: circleci/python:2.7.13
+      - image: circleci/python:latest
     working_directory: ~/repo
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
             rm -rf venv
             sudo pip install --upgrade pip setuptools
             sudo pip install virtualenv
-            virtualenv --clear venv
+            virtualenv --python=/usr/bin/python2.7 --clear venv
             source venv/bin/activate
             pip install .
       - run:
