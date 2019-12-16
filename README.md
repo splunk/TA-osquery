@@ -27,7 +27,8 @@ A Splunk technology add-on for osquery
 * Currently documented and tested for macOS only, although parsing logic can be reused for \*nix & Windows if desired.
 
 # Deploying TA
-1. Drop the TA on the Search Head(s), Indexer(s), Heavy Forwarder (if required, or if using AWS), and Universal Forwarder (if required).
+1. Copy default/inputs.conf to local/inputs.conf and uncomment all the stanzas
+2. Drop the TA on the Search Head(s), Indexer(s), Heavy Forwarder (if required, or if using AWS), and Universal Forwarder (if required).
 
 # Setting up osquery for local logging
 This deployment process has been documented and tested based on Mac OS Mojave. It is important that you thoroughly test this on your environment before rolling out to production.
