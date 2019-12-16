@@ -11,12 +11,8 @@ A Splunk technology add-on for osquery
 | ---    | ---          |
 | master | [![master status](https://circleci.com/gh/splunk/TA-osquery/tree/master.svg?style=svg)](https://circleci.com/gh/splunk/TA-osquery/tree/master)
 
-- Original Author: Jose Hernandez
-- Current maintainers:
 - Sourcetype: osquery:results, osquery:snapshots, osquery:INFO, osquery:WARNING, osquery:ERROR
 - Has index-time ops: false
-
-
 
 # Features
 * Parses and extracts fields for the following logs: 
@@ -81,3 +77,8 @@ The install process is the same as above, apart from the osquery.conf needs to b
 * Test Changes Data model mapping for FIM events in the results log
 * Document a 'Logging locally' method, whereby log rotation is discussed, and running Splunk UF as root to read the log file.
 
+# Author
+* [Jose Hernandez](https://github.com/d1vious/)
+
+# Contributors
+* Jamie Widley
