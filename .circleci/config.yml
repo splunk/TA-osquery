@@ -70,6 +70,9 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "TA-osquery/default/app.conf" }}
           paths:
             - "venv"
+      - store_artifacts:
+          path: TA-osquery.tar.gz
+          destination: TA-osquery-latest.tar.gz
       - persist_to_workspace:
           root: dist/
           paths:
