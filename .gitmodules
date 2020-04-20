@@ -1,0 +1,3 @@
+[submodule "config/osquery-attck"]
+	path = config/osquery-attck
+	url = https://github.com/teoseller/osquery-attck
