@@ -20,49 +20,26 @@ A Splunk technology add-on for osquery
 	* `osqueryd.results.log` (from process_events and file_events tables)
 	* `osqueryd.snapshots.log`
 * Provides Datamodel Mapping for:
-	* **Alerts** Data Model based on alerts from packs
 	* **Changes** Data Model based on custom `splunk` query pack
 	* **Endpoint** Data Model based on custom `splunk` query pack
 * Does _correct_ time extraction
 * Currently documented and tested for macOS only, although parsing logic can be reused for \*nix & Windows if desired.
+* Note, logs do not include parent process information other than parent process id
 
 # Deploying TA
 1. Copy default/inputs.conf to local/inputs.conf and uncomment all the stanzas
 2. Drop the TA on the Search Head(s), Indexer(s), Heavy Forwarder (if required, or if using AWS), and Universal Forwarder (if required).
 
 # Setting up osquery for local logging
-This deployment process has been documented and tested based on Mac OS Mojave. It is important that you thoroughly test this on your environment before rolling out to production.
+This deployment process has been documented and tested based on Mac OS Sequoia. It is important that you thoroughly test this on your environment before rolling out to production.
 Ref: https://osquery.readthedocs.io
+1. Download and install osquery package following instructions
+2. Copy osquery.conf and osquery.flags files to /var/osquery
+3. Ensure that Full Disk Access (FDA) permission is enabled in macOS Privacy & Security settings for osqueryd (/opt/osquery/lib/osquery.app/Contents/MacOS/osqueryd)
 
-```
-#!/bin/bash
-sudo spctl --master-disable
-sudo installer -pkg osquery.pkg -target /
-sudo mkdir /var/log/osquery
-sudo cp splunk.conf /var/osquery/packs
-sudo cp osquery.conf /var/osquery/osquery.conf
-sudo mv /etc/security/audit_control /etc/security/audit_control.bak
-sudo echo "#
-# $P4: //depot/projects/trustedbsd/openbsm/etc/audit_control#8 $
-#
-dir:/var/audit
-flags:ex,pc,ap,aa,lo,ad
-minfree:5
-naflags:no
-policy:cnt,argv,arge
-filesz:2M
-expire-after:10M
-superuser-set-sflags-mask:has_authenticated,has_console_access
-superuser-clear-sflags-mask:has_authenticated,has_console_access
-member-set-sflags-mask:
-member-clear-sflags-mask:has_authenticated" > /etc/security/audit_control
-sudo spctl --master-enable
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.auditd.plist
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.auditd.plist
-sudo /usr/local/bin/osqueryctl start
-```
 
-# Logging to AWS (preferred)
+
+# Logging to AWS (preferred - but note, these instructions have not been updated since 2019)
 **osquery config**
 
 This is the preferred collection method as it removes the need for a Universal Forwarder on each endpoint and ensures remote log connection can be achieved whether or not the endpoint is connected to the corporate network. Splunk Cloud is great way of logging from endpoints but would still require a Universal Forwarder to be rolled out.
@@ -74,11 +51,10 @@ The install process is the same as above, apart from the osquery.conf needs to b
 
 
 # To Do's
-* Test Changes Data model mapping for FIM events in the results log
 * Document a 'Logging locally' method, whereby log rotation is discussed, and running Splunk UF as root to read the log file.
 
 # Author
 * [Jose Hernandez](https://github.com/d1vious/)
 
 # Contributors
-* Jamie Widley
+* Jamie Windley

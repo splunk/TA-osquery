@@ -1,0 +1,13 @@
+--disable_events=false
+--disable_endpointsecurity=false
+--disable_endpointsecurity_fim=false
+--disable_audit=false
+--enable_monitor=true
+--enable_file_events=true
+--logger_plugin=filesystem
+--logger_rotate=true
+--logger_rotate_max_files=4
+--logger_rotate_size=26214400
+--audit_allow_config
+--audit_persist=true
+--verbose
