@@ -2,10 +2,9 @@ name: Build and Release
 
 on:
   push:
-    branches: [main, master]
     tags: ['v*']
   pull_request:
-    branches: [main, master]
+    types: [opened, reopened, synchronize]
 
 jobs:
   validate-content:
